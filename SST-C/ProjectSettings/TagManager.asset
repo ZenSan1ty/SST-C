@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ATK_Sword
+  - ATK_Paper
+  - ATK_Rock
+  - ENEMY_Sword
+  - ENEMY_Rock
+  - ENEMY_Paper
   layers:
   - Default
   - TransparentFX
