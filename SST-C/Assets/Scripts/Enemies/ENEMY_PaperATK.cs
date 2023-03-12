@@ -26,11 +26,13 @@ public class ENEMY_PaperATK : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            collision.GetComponent<Player>().TakeDamage(2);
+            Destroy(gameObject);
         }
-        else
+        if (collision.gameObject.tag == "ATK_Rock")
         {
-            Debug.Log("Collided with an object other than player");
+            Destroy(collision.gameObject);
+            Debug.Log("Destroyed the rock attack");
         }
     }
 }

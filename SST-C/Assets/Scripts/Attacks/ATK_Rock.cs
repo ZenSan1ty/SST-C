@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class ATK_Sword : MonoBehaviour
+public class ATK_Rock : MonoBehaviour
 {
 
-    [SerializeField] private float moveSpeed = 12f;
-    [SerializeField] private float lifetime = 3f;
+    [SerializeField] private float moveSpeed = 15f;
+    [SerializeField] private float lifetime = .2f;
     private Vector3 position;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(this.gameObject, lifetime);
+        Destroy(gameObject, lifetime);
     }
 
     // Update is called once per frame
@@ -21,20 +23,22 @@ public class ATK_Sword : MonoBehaviour
         position = transform.position;
         position.x += moveSpeed * Time.deltaTime;
         transform.position = position;
-
-        transform.Rotate(0, 0, -720 * Time.deltaTime);
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "ENEMY_Paper")
+        if (collision.gameObject.tag == "ENEMY_Sword")
         {
             Destroy(collision.gameObject);
         }
+        else if (collision.gameObject.tag == "ENEMY_Paper")
+        {
+            Destroy(gameObject);
+            Debug.Log("Destroyed by the paper attack");
+        }
         else
         {
-            //Debug.Log("Collided with an object other than paper enemy");
+            Debug.Log("Collided with something unknown");
         }
     }
 }

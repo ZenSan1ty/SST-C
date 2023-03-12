@@ -12,15 +12,20 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject Sword;
     [SerializeField] private GameObject Paper;
     [SerializeField] private GameObject Rock;
+    [SerializeField] private GameObject attackSpawnPos;
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float fireTime = 0f;
     [SerializeField] private bool canFire = true;
+
+    //Health info
+    [SerializeField] private int maxHealth = 10;
+    [SerializeField] private int currentHealth;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -88,7 +93,7 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown("x") || Input.GetKeyDown("o"))
                 ATK_Paper();
 
-            //Rock Attack - z/u
+            //Rock Attack - z/i
             if (Input.GetKeyDown("z") || Input.GetKeyDown("i"))
                 ATK_Rock();
         }
@@ -96,7 +101,7 @@ public class Player : MonoBehaviour
 
     private void ATK_Sword()
     {
-        Instantiate(Sword, transform.position, transform.rotation);
+        Instantiate(Sword, attackSpawnPos.transform.position, transform.rotation);
 
         canFire = false;
         fireTime = Time.time + fireRate;
@@ -104,7 +109,7 @@ public class Player : MonoBehaviour
 
     private void ATK_Paper()
     {
-
+        Instantiate(Paper, attackSpawnPos.transform.position, transform.rotation);
 
         canFire = false;
         fireTime = Time.time + fireRate;
@@ -112,9 +117,19 @@ public class Player : MonoBehaviour
 
     private void ATK_Rock()
     {
-
+        Instantiate(Rock, attackSpawnPos.transform.position, transform.rotation);
 
         canFire = false;
         fireTime = Time.time + fireRate;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
