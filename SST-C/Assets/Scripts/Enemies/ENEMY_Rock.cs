@@ -5,13 +5,25 @@ using UnityEngine;
 public class ENEMY_Rock: MonoBehaviour
 {
 
-    [SerializeField] private float moveSpeed = 5f;
+    public float moveSpeed = 5f;
     private Vector3 position;
+    [SerializeField] private int maxHealth = 2;
+    [SerializeField] private int curHealth;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Check if any bosses have been defeated and change the enemy health accordingly
+        if (GameManager.instance.pBossDefeated == true | GameManager.instance.sBossDefeated == true)
+        {
+            maxHealth = 4;
+        }
+        else if (GameManager.instance.pBossDefeated == true && GameManager.instance.sBossDefeated == true)
+        {
+            maxHealth = 6;
+        }
         
+        curHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -31,9 +43,10 @@ public class ENEMY_Rock: MonoBehaviour
             collision.GetComponent<Player>().TakeDamage(3);
             Destroy(gameObject);
         }
-        else
+        if (collision.gameObject.tag == "ENEMY_Rock" && moveSpeed == -5f)
         {
-            //Debug.Log("Collided with an object other than player");
+            collision.GetComponent<ENEMY_Rock>().curHealth = curHealth - 2;
+            Destroy(gameObject);
         }
     }
 
@@ -41,5 +54,12 @@ public class ENEMY_Rock: MonoBehaviour
     {
         if (position.x < -15)
             position.x = 15;
+    }
+
+    public void Bounce()
+    {
+        GetComponent<Collider2D>().isTrigger = false;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        moveSpeed = -moveSpeed;
     }
 }

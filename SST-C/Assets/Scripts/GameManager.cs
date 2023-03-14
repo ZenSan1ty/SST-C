@@ -16,6 +16,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
 
+    public bool rBossDefeated = false;
+    public bool pBossDefeated = false;
+    public bool sBossDefeated = false;
+
     void Awake()
     {
         if (instance == null)

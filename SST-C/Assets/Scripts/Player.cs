@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool canFire = true;
 
     //Health info
-    [SerializeField] private int maxHealth = 10;
+    [SerializeField] private int maxHealth = 10 ;
     [SerializeField] private int currentHealth;
 
 

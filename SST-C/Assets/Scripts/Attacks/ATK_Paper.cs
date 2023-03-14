@@ -23,12 +23,17 @@ public class ATK_Paper : MonoBehaviour
     {
         if (collision.gameObject.tag == "ENEMY_Rock")
         {
-            collision.GetComponent<ENEMY_Rock>();
+            collision.GetComponent<ENEMY_Rock>().Bounce();
             
         }
-        else
+        else if (collision.gameObject.tag == "ENEMY_Sword")
         {
-            //Debug.Log("Collided with an object other than paper enemy");
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.tag == "ENEMY_Paper")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }
