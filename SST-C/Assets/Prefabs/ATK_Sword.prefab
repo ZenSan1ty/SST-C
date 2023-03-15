@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7714282211069481233}
   - component: {fileID: 7714282211069481232}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 3468814650347664711}
   - component: {fileID: 7714282211381454723}
   - component: {fileID: 2640441281960054146}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ATK_Sword
   m_TagString: ATK_Sword
   m_Icon: {fileID: 0}
@@ -289,3 +289,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 12
   lifetime: 3
+  atkDamage: 2

@@ -34,5 +34,10 @@ public class ENEMY_PaperATK : MonoBehaviour
             Destroy(collision.gameObject);
             Debug.Log("Destroyed the rock attack");
         }
+        if (collision.gameObject.tag == "ATK_Sword")
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
     }
 }

@@ -9,6 +9,7 @@ public class ATK_Rock : MonoBehaviour
     [SerializeField] private float moveSpeed = 15f;
     [SerializeField] private float lifetime = .2f;
     private Vector3 position;
+    [SerializeField] private int atkDamage = 2;
 
 
     // Start is called before the first frame update
@@ -27,18 +28,21 @@ public class ATK_Rock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Damage the sword enemy
         if (collision.gameObject.tag == "ENEMY_Sword")
         {
-            Destroy(collision.gameObject);
+            collision.GetComponent<ENEMY_Sword>().Damage(atkDamage);
         }
+        //Destroy the rock attack
         else if (collision.gameObject.tag == "ENEMY_Paper")
         {
             Destroy(gameObject);
-            Debug.Log("Destroyed by the paper attack");
         }
-        else
+        //Stun the rock enemy and destroy the rock attack
+        else if (collision.gameObject.tag == "ENEMY_Rock")
         {
-            Debug.Log("Collided with something unknown");
+            collision.GetComponent<ENEMY_Rock>().Stun();
+            Destroy(gameObject);
         }
     }
 }

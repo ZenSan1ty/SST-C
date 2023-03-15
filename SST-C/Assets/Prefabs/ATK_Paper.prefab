@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8047242165592959081}
   - component: {fileID: 7602077834579376637}
   - component: {fileID: 6320760413415462244}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ATK_Paper
   m_TagString: ATK_Paper
   m_Icon: {fileID: 0}

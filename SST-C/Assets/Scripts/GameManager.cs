@@ -20,6 +20,14 @@ public class GameManager : MonoBehaviour
     public bool pBossDefeated = false;
     public bool sBossDefeated = false;
 
+    public int rocksKilled = 0;
+    public int papersKilled = 0;
+    public int swordsKilled = 0;
+
+    public int swordsAlive = 0;
+    public int rocksAlive = 0;
+    public int papersAlive = 0;
+
     void Awake()
     {
         if (instance == null)

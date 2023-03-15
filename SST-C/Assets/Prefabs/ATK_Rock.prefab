@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5406565758935563865}
   - component: {fileID: 5406565758935563870}
   - component: {fileID: 5406565758935563871}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ATK_Rock
   m_TagString: ATK_Rock
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 12.5
   lifetime: 0.3
+  atkDamage: 2
 --- !u!50 &5406565758935563870
 Rigidbody2D:
   serializedVersion: 4
