@@ -5,7 +5,6 @@ using UnityEngine;
 public class ENEMY_Sword : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 12f;
-    [SerializeField] private float lifetime = 3f;
     private Vector3 position;
     [SerializeField] private int maxHealth = 2;
     [SerializeField] private int curHealth;
@@ -50,8 +49,8 @@ public class ENEMY_Sword : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.GetComponent<Player>().TakeDamage(1);
-            Destroy(gameObject);
+            collision.GetComponent<Player>().TakeDamage(2);
+            Damage(curHealth);
         }
         else
         {
@@ -70,14 +69,16 @@ public class ENEMY_Sword : MonoBehaviour
         curHealth -= damage;
         if (curHealth <= 0)
         {
-            GameManager.instance.swordsKilled += 1;
+            GameManager.instance.swordsKilled++;
+            GameManager.instance.swordsAlive--;
             Destroy(gameObject);
+            GameManager.instance.CheckBossSpawn();
         }
     }
 
     public void Stun()
     {
-        moveSpeed = 0;
+        moveSpeed = 3f;
         isStunned = true;
     }
 
@@ -90,7 +91,7 @@ public class ENEMY_Sword : MonoBehaviour
             {
                 isStunned = false;
                 stunnedTime = 0;
-                moveSpeed = 5f;
+                moveSpeed = 12f;
             }
         }
     }

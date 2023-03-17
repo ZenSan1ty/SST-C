@@ -6,14 +6,16 @@ using UnityEngine.SocialPlatforms.Impl;
 public class ENEMY_Paper : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private float initMoveSpeed;
     private Vector3 position;
-    [SerializeField] private float fireRate = 1f;
+    [SerializeField] private float fireRate = 4f;
     [SerializeField] private float fireTime = 0f;
     [SerializeField] private bool canFire = true;
     public GameObject attack;
     [SerializeField] private int maxHealth = 2;
     [SerializeField] private int curHealth;
     [SerializeField] private GameObject atkSpawn;
+    public float isNegative;
 
 
     // Start is called before the first frame update
@@ -53,12 +55,29 @@ public class ENEMY_Paper : MonoBehaviour
         position.y += moveSpeed * Time.deltaTime;
         transform.position = position;
 
+
+
         if (canFire == true)
         {
+            //Debug.Log("Started Coroutine");
+            //StartCoroutine(FireTest());
             Fire();
         }
     }
 
+    IEnumerator FireTest()
+    {
+
+        initMoveSpeed = moveSpeed;
+
+        moveSpeed = 0;
+
+        yield return new WaitForSeconds(0.2f);
+
+        while (canFire)
+            Fire();
+        moveSpeed = initMoveSpeed;
+    }
     public void Fire()
     {
         Instantiate(attack, atkSpawn.transform.position, transform.rotation);
@@ -75,6 +94,7 @@ public class ENEMY_Paper : MonoBehaviour
             GameManager.instance.papersKilled++;
             GameManager.instance.papersAlive--;
             Destroy(gameObject);
+            GameManager.instance.CheckBossSpawn();
         }
     }
 

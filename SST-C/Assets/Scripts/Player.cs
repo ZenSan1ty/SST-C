@@ -16,10 +16,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float fireTime = 0f;
     [SerializeField] private bool canFire = true;
+    [SerializeField] private HealthBar healthBar;
 
     //Health info
-    [SerializeField] private int maxHealth = 10 ;
-    [SerializeField] private int currentHealth;
+    public int maxHealth = 20;
+    public int currentHealth;
 
 
     // Start is called before the first frame update
@@ -126,6 +127,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthBar.UpdateHealthBar();
 
         if (currentHealth <= 0)
         {

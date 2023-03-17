@@ -6,6 +6,8 @@ public class ATK_Paper : MonoBehaviour
 {
 
     [SerializeField] private float lifetime = 5f;
+    private Vector3 position;
+    public float moveSpeed = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +18,11 @@ public class ATK_Paper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        position = transform.position;
+
+        position.x -= moveSpeed * Time.deltaTime;
+
+        transform.position = position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

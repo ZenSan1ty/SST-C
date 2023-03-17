@@ -12,6 +12,9 @@ public class ENEMY_Rock: MonoBehaviour
     [SerializeField] private bool isStunned = false;
     [SerializeField] private float stunTimer = 2f;
     [SerializeField] private float stunnedTime = 0f;
+    [SerializeField] private float rotateSpeed = 360;
+
+    [SerializeField] private GameObject sprite;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +41,10 @@ public class ENEMY_Rock: MonoBehaviour
         position.x -= moveSpeed * Time.deltaTime;
         Boundary();
         transform.position = position;
+        if (isStunned == false)
+        {
+            sprite.transform.Rotate(0, 0, rotateSpeed * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -45,11 +52,19 @@ public class ENEMY_Rock: MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.GetComponent<Player>().TakeDamage(3);
-            Destroy(gameObject);
+            Damage(curHealth);
         }
-        if (collision.gameObject.tag == "ENEMY_Rock" && moveSpeed == -5f)
+        if (collision.gameObject.tag == "ENEMY_Rock" && moveSpeed < 0)
         {
             collision.GetComponent<ENEMY_Rock>().Damage(2);
+            Damage(curHealth);
+        }
+        if (collision.gameObject.tag == "ENEMY_Sword" && moveSpeed < 0)
+        {
+            collision.GetComponent<ENEMY_Sword>().Damage(2);
+        }
+        if (collision.gameObject.tag =="ENEMY_Paper" && moveSpeed < 0)
+        {
             Damage(curHealth);
         }
     }
@@ -67,7 +82,8 @@ public class ENEMY_Rock: MonoBehaviour
     {
         GetComponent<Collider2D>().isTrigger = false;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        moveSpeed = -5f;
+        moveSpeed = -2.5f;
+        rotateSpeed = -rotateSpeed;
     }
 
     public void Damage(int damage)
@@ -78,12 +94,13 @@ public class ENEMY_Rock: MonoBehaviour
             GameManager.instance.rocksKilled++;
             GameManager.instance.rocksAlive--;
             Destroy(gameObject);
+            GameManager.instance.CheckBossSpawn();
         }
     }
 
     public void Stun()
     {
-        moveSpeed = 0;
+        moveSpeed = 3f;
         isStunned = true;
     }
 

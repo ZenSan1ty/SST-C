@@ -6,9 +6,11 @@ public class PaperSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject paperEnemy;
     [SerializeField] private bool canSpawn = true;
-    [SerializeField] private float spawnDelay = 4f;
+    private float[] spawnDelay = { 3.67f, 3.67f, 3.2f, 3.2f, 2.4f, 2.4f, 2.4f, 2.4f, 2.4f };
     [SerializeField] private float currentSpawnDelay;
-    [SerializeField] private int maxAlive = 3;
+    //[SerializeField] private int maxAlive = 3;
+    private int[] maxAlive = { 1, 1, 2, 3, 3, 3, 4, 5, 6 };
+    private int currentDifficulty = GameManager.instance.difficultyLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,8 @@ public class PaperSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canSpawn && GameManager.instance.papersAlive < maxAlive)
+        UpdateDifficulty();
+        if (canSpawn && GameManager.instance.papersAlive < maxAlive[currentDifficulty])
         {
             SpawnEnemy();
             canSpawn = false;
@@ -27,7 +30,7 @@ public class PaperSpawner : MonoBehaviour
         if (!canSpawn)
         {
             currentSpawnDelay += Time.deltaTime;
-            if (currentSpawnDelay >= spawnDelay)
+            if (currentSpawnDelay >= spawnDelay[currentDifficulty])
             {
                 canSpawn = true;
                 currentSpawnDelay = 0f  ;
@@ -39,5 +42,14 @@ public class PaperSpawner : MonoBehaviour
     {
         Instantiate(paperEnemy);
         GameManager.instance.papersAlive += 1;
+    }
+
+    private void UpdateDifficulty()
+    {
+        currentDifficulty = GameManager.instance.difficultyLevel;
+        if (currentDifficulty > maxAlive.Length - 1)
+        {
+            currentDifficulty = maxAlive.Length - 1;
+        }
     }
 }

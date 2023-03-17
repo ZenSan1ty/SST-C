@@ -42,7 +42,7 @@ public class ATK_Rock : MonoBehaviour
         else if (collision.gameObject.tag == "ENEMY_Rock")
         {
             collision.GetComponent<ENEMY_Rock>().Stun();
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

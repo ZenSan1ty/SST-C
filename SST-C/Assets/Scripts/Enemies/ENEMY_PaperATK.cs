@@ -26,7 +26,7 @@ public class ENEMY_PaperATK : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.GetComponent<Player>().TakeDamage(2);
+            collision.GetComponent<Player>().TakeDamage(1);
             Destroy(gameObject);
         }
         if (collision.gameObject.tag == "ATK_Rock")
@@ -37,7 +37,7 @@ public class ENEMY_PaperATK : MonoBehaviour
         if (collision.gameObject.tag == "ATK_Sword")
         {
             Destroy(gameObject);
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
     }
 }
