@@ -219,6 +219,9 @@ MonoBehaviour:
   yBoundary: 4.8
   player: {fileID: 1669884866}
   playerDead: 0
+  rBossAlive: 0
+  pBossAlive: 0
+  sBossAlive: 0
   rBossDefeated: 0
   pBossDefeated: 0
   sBossDefeated: 0

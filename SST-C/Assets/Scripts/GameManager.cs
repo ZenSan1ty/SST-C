@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public bool playerDead = false;
 
+    public bool rBossAlive = false;
+    public bool pBossAlive = false;
+    public bool sBossAlive = false;
     public bool rBossDefeated = false;
     public bool pBossDefeated = false;
     public bool sBossDefeated = false;
@@ -99,16 +102,17 @@ public class GameManager : MonoBehaviour
         {
             DeactivateSpawners();
             Instantiate(RockBoss, BossSpawn.transform.position, transform.rotation);
+            rBossAlive = true;
         }
         else if (swordsKilled >= killsRequired && !sBossDefeated)
         {
             DeactivateSpawners();
-            Instantiate(RockBoss, BossSpawn.transform.position, transform.rotation);
+            //Instantiate(RockBoss, BossSpawn.transform.position, transform.rotation);
         }
         else if (papersKilled >= killsRequired && !pBossDefeated)
         {
             DeactivateSpawners();
-            Instantiate(RockBoss, BossSpawn.transform.position, transform.rotation);
+            //Instantiate(RockBoss, BossSpawn.transform.position, transform.rotation);
         }
         else
             Debug.Log("Not enough kills to spawn boss");

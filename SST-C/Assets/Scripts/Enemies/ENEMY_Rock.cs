@@ -14,6 +14,7 @@ public class ENEMY_Rock: MonoBehaviour
     [SerializeField] private float stunTimer = 2f;
     [SerializeField] private float stunnedTime = 0f;
     [SerializeField] private float rotateSpeed = 360;
+    [SerializeField] private bool rockBossAlive = false;
 
     [SerializeField] private GameObject sprite;
 
@@ -32,8 +33,11 @@ public class ENEMY_Rock: MonoBehaviour
         
         curHealth = maxHealth;
 
-        if (GameManager.instance.rocksKilled == GameManager.instance.killsRequired && !GameManager.instance.rBossDefeated)
+        if (GameManager.instance.rBossAlive)
+        {
+            rockBossAlive = true;
             moveSpeed = 10f;
+        }
 
         initMoveSpeed = moveSpeed;
     }
@@ -60,7 +64,7 @@ public class ENEMY_Rock: MonoBehaviour
             collision.GetComponent<Player>().TakeDamage(3);
             Damage(curHealth);
         }
-        if (collision.gameObject.tag == "ENEMY_Rock" && moveSpeed < 0)
+        if (collision.gameObject.tag == "ENEMY_Rock" && moveSpeed < 0 && !rockBossAlive)
         {
             collision.GetComponent<ENEMY_Rock>().Damage(2);
             Damage(curHealth);
@@ -81,8 +85,10 @@ public class ENEMY_Rock: MonoBehaviour
 
     private void Boundary()
     {
-        if (position.x < -15)
+        if (position.x < -15 && !rockBossAlive)
             position.x = 15;
+        else if (position.x < -15 && rockBossAlive)
+            Destroy(gameObject);
 
         if (position.x > 15.5)
             Damage(curHealth);
@@ -105,7 +111,8 @@ public class ENEMY_Rock: MonoBehaviour
             GameManager.instance.rocksKilled++;
             GameManager.instance.rocksAlive--;
             Destroy(gameObject);
-            GameManager.instance.CheckBossSpawn();
+            if (!rockBossAlive)
+                GameManager.instance.CheckBossSpawn();
         }
     }
 
