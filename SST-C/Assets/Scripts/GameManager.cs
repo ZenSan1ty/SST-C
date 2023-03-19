@@ -103,12 +103,12 @@ public class GameManager : MonoBehaviour
         else if (swordsKilled >= killsRequired && !sBossDefeated)
         {
             DeactivateSpawners();
-            Debug.Log("Spawn Sword Boss");
+            Instantiate(RockBoss, BossSpawn.transform.position, transform.rotation);
         }
         else if (papersKilled >= killsRequired && !pBossDefeated)
         {
             DeactivateSpawners();
-            Debug.Log("Spawn Paper Boss");
+            Instantiate(RockBoss, BossSpawn.transform.position, transform.rotation);
         }
         else
             Debug.Log("Not enough kills to spawn boss");

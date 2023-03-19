@@ -10,6 +10,9 @@ TagManager:
   - ENEMY_Sword
   - ENEMY_Rock
   - ENEMY_Paper
+  - BOSS_Rock
+  - BOSS_Paper
+  - BOSS_Sword
   layers:
   - Default
   - TransparentFX

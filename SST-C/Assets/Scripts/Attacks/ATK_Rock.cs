@@ -44,5 +44,9 @@ public class ATK_Rock : MonoBehaviour
             collision.GetComponent<ENEMY_Rock>().Stun();
             //Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "BOSS_Rock")
+        {
+            Destroy(gameObject);
+        }
     }
 }

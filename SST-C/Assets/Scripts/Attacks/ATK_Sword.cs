@@ -44,5 +44,9 @@ public class ATK_Sword : MonoBehaviour
         {
             collision.GetComponent<ENEMY_Sword>().Stun();
         }
+        else if (collision.gameObject.tag == "BOSS_Rock")
+        {
+            Destroy(gameObject);
+        }
     }
 }

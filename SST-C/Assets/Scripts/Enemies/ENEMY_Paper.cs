@@ -10,13 +10,19 @@ public class ENEMY_Paper : MonoBehaviour
     private Vector3 position;
     [SerializeField] private float fireRate = 4f;
     [SerializeField] private float fireTime = 0f;
-    [SerializeField] private bool canFire = true;
+    [SerializeField] private bool canFire = false;
     public GameObject attack;
     [SerializeField] private int maxHealth = 2;
     [SerializeField] private int curHealth;
     [SerializeField] private GameObject atkSpawn;
     public float isNegative;
+    private Coroutine stopMovingDuringFire;
+    WaitForSeconds moveDelay = new WaitForSeconds(0.2f);
 
+    private void Awake()
+    {
+        RandomizeFireRate();   
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -57,11 +63,11 @@ public class ENEMY_Paper : MonoBehaviour
 
 
 
-        if (canFire == true)
+        if (canFire == true && stopMovingDuringFire == null)
         {
             //Debug.Log("Started Coroutine");
-            //StartCoroutine(FireTest());
-            Fire();
+            stopMovingDuringFire = StartCoroutine(FireTest());
+            
         }
     }
 
@@ -72,17 +78,23 @@ public class ENEMY_Paper : MonoBehaviour
 
         moveSpeed = 0;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return moveDelay;
 
         while (canFire)
             Fire();
+
+        yield return moveDelay;
+
         moveSpeed = initMoveSpeed;
+
+        stopMovingDuringFire = null;
     }
     public void Fire()
     {
         Instantiate(attack, atkSpawn.transform.position, transform.rotation);
 
         canFire = false;
+        RandomizeFireRate();
         fireTime = Time.time + fireRate;
     }
 
@@ -96,6 +108,11 @@ public class ENEMY_Paper : MonoBehaviour
             Destroy(gameObject);
             GameManager.instance.CheckBossSpawn();
         }
+    }
+
+    private void RandomizeFireRate()
+    {
+        fireRate = Random.Range(1f, 4f);
     }
 
 }

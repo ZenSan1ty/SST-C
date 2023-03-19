@@ -6,6 +6,7 @@ public class ENEMY_Rock: MonoBehaviour
 {
 
     public float moveSpeed = 5f;
+    public float initMoveSpeed;
     private Vector3 position;
     [SerializeField] private int maxHealth = 2;
     [SerializeField] private int curHealth;
@@ -17,7 +18,7 @@ public class ENEMY_Rock: MonoBehaviour
     [SerializeField] private GameObject sprite;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //Check if any bosses have been defeated and change the enemy health accordingly
         if (GameManager.instance.pBossDefeated == true || GameManager.instance.sBossDefeated == true)
@@ -30,6 +31,11 @@ public class ENEMY_Rock: MonoBehaviour
         }
         
         curHealth = maxHealth;
+
+        if (GameManager.instance.rocksKilled == GameManager.instance.killsRequired && !GameManager.instance.rBossDefeated)
+            moveSpeed = 10f;
+
+        initMoveSpeed = moveSpeed;
     }
 
     // Update is called once per frame
@@ -67,6 +73,10 @@ public class ENEMY_Rock: MonoBehaviour
         {
             Damage(curHealth);
         }
+        if (collision.gameObject.tag == "BOSS_Rock")
+        {
+            collision.GetComponent<RockBoss>().Damage(2);
+        }
     }
 
     private void Boundary()
@@ -82,7 +92,8 @@ public class ENEMY_Rock: MonoBehaviour
     {
         GetComponent<Collider2D>().isTrigger = false;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        moveSpeed = -2.5f;
+        isStunned = false;
+        moveSpeed = -5f;
         rotateSpeed = -rotateSpeed;
     }
 
@@ -113,7 +124,7 @@ public class ENEMY_Rock: MonoBehaviour
             {
                 isStunned = false;
                 stunnedTime = 0;
-                moveSpeed = 5f;
+                moveSpeed = initMoveSpeed;
             }
         }
     }

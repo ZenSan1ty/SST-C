@@ -204,13 +204,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  fireRate: 2
+  initMoveSpeed: 0
+  fireRate: 1.5
   fireTime: 0
   canFire: 1
   attack: {fileID: 8264883245429440263, guid: 050604d7040f5e44ab5192b05eaf01c8, type: 3}
   maxHealth: 2
   curHealth: 0
   atkSpawn: {fileID: 6659116426075794453}
+  isNegative: 0
 --- !u!114 &1565481201943683793
 MonoBehaviour:
   m_ObjectHideFlags: 0

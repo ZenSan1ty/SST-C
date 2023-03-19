@@ -41,5 +41,9 @@ public class ATK_Paper : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "BOSS_Rock")
+        {
+            Destroy(gameObject);
+        }
     }
 }
