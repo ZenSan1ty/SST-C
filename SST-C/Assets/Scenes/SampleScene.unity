@@ -227,7 +227,7 @@ MonoBehaviour:
   sBossDefeated: 0
   RockBoss: {fileID: 6786566117648555991, guid: de67018834ddf764092d0b1a408bfa30, type: 3}
   PaperBoss: {fileID: 0}
-  SwordBoss: {fileID: 0}
+  SwordBoss: {fileID: 5753388454885383938, guid: 4faa79918f5131d4c90664f8fe5b2aaa, type: 3}
   BossSpawn: {fileID: 871647097}
   rocksKilled: 0
   papersKilled: 0
@@ -350,7 +350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &454519266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,6 +667,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarImage: {fileID: 1033334372}
   player: {fileID: 1669884867}
+  swordBoss: {fileID: 0}
+  rockBoss: {fileID: 0}
 --- !u!1 &1437881431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,7 +1225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911954543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 30, y: 30, z: 30}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1246,7 +1248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1915411955
 Transform:
   m_ObjectHideFlags: 0

@@ -12,8 +12,8 @@ public class RockBoss : MonoBehaviour
     WaitForSeconds shortWait = new WaitForSeconds(0.2f);
     WaitForSeconds longWait = new WaitForSeconds(2f);
 
-    [SerializeField] private int maxHealth = 60;
-    [SerializeField] private int curHealth;
+    [SerializeField] public int maxHealth = 60;
+    [SerializeField] public int curHealth;
 
     private Vector3 topSpawnPos;
     private Vector3 bottomSpawnPos;
@@ -28,6 +28,8 @@ public class RockBoss : MonoBehaviour
     [SerializeField] private GameObject rockEnemyVert;
     private GameObject player;
 
+    [SerializeField] private HealthBar healthBar;
+
     private Coroutine currentAttack;
 
     private void Awake()
@@ -39,7 +41,7 @@ public class RockBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        curHealth = 20;
+        curHealth = maxHealth;
         UpdateSpawnPos();
     }
 
@@ -159,6 +161,7 @@ public class RockBoss : MonoBehaviour
     public void Damage(int damage)
     {
         curHealth -= damage;
+        healthBar.UpdateHealthBar();
         CheckStage();
         if (curHealth <= 0)
         {

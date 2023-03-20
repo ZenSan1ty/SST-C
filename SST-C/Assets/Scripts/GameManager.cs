@@ -107,7 +107,8 @@ public class GameManager : MonoBehaviour
         else if (swordsKilled >= killsRequired && !sBossDefeated)
         {
             DeactivateSpawners();
-            //Instantiate(RockBoss, BossSpawn.transform.position, transform.rotation);
+            Instantiate(SwordBoss, BossSpawn.transform.position, transform.rotation);
+            sBossAlive = true;
         }
         else if (papersKilled >= killsRequired && !pBossDefeated)
         {

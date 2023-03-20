@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ENEMY_Sword : MonoBehaviour
+public class ENEMY_SwordSineBounce : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 12f;
+    [SerializeField] private float moveSpeedHori = 12f;
+    [SerializeField] private float moveSpeedVert = 5f;
     private Vector3 position;
     [SerializeField] private int maxHealth = 2;
     [SerializeField] private int curHealth;
@@ -34,7 +35,8 @@ public class ENEMY_Sword : MonoBehaviour
         //Enemy movement
         position = transform.position;
         CheckStun();
-        position.x -= moveSpeed * Time.deltaTime;
+        position.x -= moveSpeedHori * Time.deltaTime;
+        position.y += (Mathf.Sin(moveSpeedVert * Time.time) * 10f) * Time.deltaTime;
         //Check if enemy has reached off-screen boundary and move enemy back on screen
         Boundary();
         transform.position = position;
@@ -61,7 +63,7 @@ public class ENEMY_Sword : MonoBehaviour
     private void Boundary()
     {
         if (position.x < -15)
-            position.x = 15;
+            Destroy(gameObject);
     }
 
     public void Damage(int damage)
@@ -69,17 +71,14 @@ public class ENEMY_Sword : MonoBehaviour
         curHealth -= damage;
         if (curHealth <= 0)
         {
-            GameManager.instance.swordsKilled++;
-            GameManager.instance.swordsAlive--;
             Destroy(gameObject);
-            if (GameManager.instance.sBossAlive == false)
-                GameManager.instance.CheckBossSpawn();
         }
     }
 
     public void Stun()
     {
-        moveSpeed = 3f;
+        moveSpeedHori = 3f;
+        moveSpeedVert = 0f;
         isStunned = true;
     }
 
@@ -92,7 +91,8 @@ public class ENEMY_Sword : MonoBehaviour
             {
                 isStunned = false;
                 stunnedTime = 0;
-                moveSpeed = 12f;
+                moveSpeedHori = 12f;
+                moveSpeedVert = 5f;
             }
         }
     }
