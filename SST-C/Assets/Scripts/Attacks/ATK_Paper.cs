@@ -51,5 +51,9 @@ public class ATK_Paper : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "Shield")
+        {
+            Destroy(gameObject);
+        }
     }
 }

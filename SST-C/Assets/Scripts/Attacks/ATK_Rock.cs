@@ -52,5 +52,13 @@ public class ATK_Rock : MonoBehaviour
         {
             collision.GetComponent<SwordBoss>().Damage(atkDamage);
         }
+        else if (collision.gameObject.tag == "BOSS_Paper")
+        {
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.tag == "Shield")
+        {
+            Destroy(gameObject);
+        }
     }
 }

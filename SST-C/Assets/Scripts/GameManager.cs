@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         else if (papersKilled >= killsRequired && !pBossDefeated)
         {
             DeactivateSpawners();
-            //Instantiate(RockBoss, BossSpawn.transform.position, transform.rotation);
+            Instantiate(PaperBoss, BossSpawn.transform.position, transform.rotation);
         }
         else
             Debug.Log("Not enough kills to spawn boss");

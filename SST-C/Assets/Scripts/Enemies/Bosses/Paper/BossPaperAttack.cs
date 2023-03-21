@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ENEMY_PaperATK : MonoBehaviour
+public class BossPaperAttack : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 12f;
+    [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float lifetime = 5f;
     private Vector3 position;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
         Destroy(this.gameObject, lifetime);
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
         position = transform.position;
-        position.x -= moveSpeed * Time.deltaTime;
+        //transform.LookAt(player.transform.position);
+        Move();
         transform.position = position;
     }
 
@@ -38,6 +41,26 @@ public class ENEMY_PaperATK : MonoBehaviour
         {
             Destroy(gameObject);
             //Destroy(collision.gameObject);
+        }
+    }
+
+    private void Move()
+    {
+        if (position.x > player.transform.position.x)
+        {
+            position.x -= moveSpeed * Time.deltaTime;
+        }
+        else if (position.x < player.transform.position.x)
+        {
+            position.x += moveSpeed * Time.deltaTime; ;
+        }
+        if (position.y > player.transform.position.y)
+        {
+            position.y -= moveSpeed * Time.deltaTime;
+        }
+        else if (position.y < player.transform.position.y)
+        {
+            position.y += moveSpeed * Time.deltaTime;
         }
     }
 }

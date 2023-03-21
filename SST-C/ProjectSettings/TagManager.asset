@@ -13,6 +13,7 @@ TagManager:
   - BOSS_Rock
   - BOSS_Paper
   - BOSS_Sword
+  - Shield
   layers:
   - Default
   - TransparentFX

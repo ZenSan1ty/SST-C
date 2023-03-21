@@ -48,5 +48,14 @@ public class ATK_Sword : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else if (collision.gameObject.tag == "BOSS_Paper")
+        {
+            collision.GetComponent<PaperBoss>().Damage(atkDamage);
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.tag == "Shield")
+        {
+            Destroy(gameObject);
+        }
     }
 }

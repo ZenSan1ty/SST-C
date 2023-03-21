@@ -194,6 +194,7 @@ MonoBehaviour:
   player: {fileID: 0}
   swordBoss: {fileID: 0}
   rockBoss: {fileID: 7815810260645915847}
+  paperBoss: {fileID: 0}
 --- !u!1 &6786566117648555991
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,8 +271,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingOrder: 185
+  m_Sprite: {fileID: 21300000, guid: 10e200d0317030140bba55a33c55a221, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -305,6 +306,7 @@ MonoBehaviour:
   initMoveSpeedHori: 30
   rockEnemy: {fileID: 181807899248355195, guid: f275b63ef897ec14ab0dbcee2bbbe6a9, type: 3}
   rockEnemyVert: {fileID: 181807899248355195, guid: 655f6dce36cc39d4fa983300499bd5bf, type: 3}
+  healthBar: {fileID: 0}
 --- !u!50 &-5137517265039719899
 Rigidbody2D:
   serializedVersion: 4

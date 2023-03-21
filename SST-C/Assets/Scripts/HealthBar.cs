@@ -10,6 +10,7 @@ public class HealthBar : MonoBehaviour
     public Player player;
     public SwordBoss swordBoss;
     public RockBoss rockBoss;
+    public PaperBoss paperBoss;
 
     public void UpdateHealthBar()
     {
@@ -24,7 +25,10 @@ public class HealthBar : MonoBehaviour
         else if (rockBoss != null)
         {
             healthBarImage.fillAmount = Mathf.Clamp((float)rockBoss.curHealth / (float)rockBoss.maxHealth, 0, 1f);
-
+        }
+        else if (paperBoss != null)
+        {
+            healthBarImage.fillAmount = Mathf.Clamp((float)paperBoss.curHealth / (float)paperBoss.maxHealth, 0, 1f);
         }
     }
 }
