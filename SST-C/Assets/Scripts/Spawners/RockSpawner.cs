@@ -48,7 +48,7 @@ public class RockSpawner : MonoBehaviour
 
     private void RandomiseSpawn()
     {
-        spawnPosition.y = UnityEngine.Random.Range(-3.5f, 3.5f);
+        spawnPosition.y = UnityEngine.Random.Range(-4.8f, 4.8f);
     }
     
     private void UpdateDifficulty()

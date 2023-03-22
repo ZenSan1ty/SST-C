@@ -7,17 +7,19 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    private GameObject parent;
+    public GameObject parent;
     [SerializeField] private int score = 0;
     [SerializeField] public int Score {  
         get { return  score; }
         private set { score = value; }
     }
-    private Text scoreText;
+    public Text scoreText;
     private float timeSinceStart = 0f;
 
-    public float xBoundary = 95f;
-    public float yBoundary = 35f;
+    public GameObject deathScreen;
+
+    public float xBoundary = 98f;
+    public float yBoundary = 38f;
 
     public GameObject player;
     public bool playerDead = false;
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
     public GameObject PaperBoss;
     public GameObject SwordBoss;
     public GameObject BossSpawn;
+    public GameObject bg;
 
     public int rocksKilled = 0;
     public int papersKilled = 0;
@@ -63,8 +66,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        parent = GameObject.Find("Score Text");
-        scoreText = parent.GetComponent<Text>();
+        //parent = GameObject.Find("Canvas/Death Screen/Score Text");
+        //scoreText = parent.GetComponent<Text>();
 
         UpdateScore();
     }
@@ -73,21 +76,37 @@ public class GameManager : MonoBehaviour
     {
         if (playerDead == false)
         {
-            CalculateScore();
-        }
+            //CalculateScore();
 
-        if (player == null)
-        {
-            playerDead = true;
         }
 
         difficultyLevel = Score / 500;
     }
 
+    public void PlayerDied()
+    {
+        deathScreen.SetActive(true);
+        bg.GetComponent<ScrollingBackground>().speed = 0;
+        CalculateScore();
+        DeactivateSpawners();
+        playerDead = true;
+        //Destroy(player);
+        //Time.timeScale = 0f;
+    }
+
     private void CalculateScore()
     {
         timeSinceStart += Time.deltaTime;
-        Score = (int)(((rocksKilled + papersKilled + swordsKilled) * 50) + Mathf.Round(timeSinceStart));
+        Score = (int)(((rocksKilled + papersKilled + swordsKilled) * 50) + (Mathf.Round(timeSinceStart) * 10));
+        if (playerDead)
+        {
+            if (rBossDefeated)
+                Score += 500;
+            if (sBossDefeated)
+                Score += 500;
+            if (pBossDefeated)
+                Score += 500;
+        }
         UpdateScore();
     }
     

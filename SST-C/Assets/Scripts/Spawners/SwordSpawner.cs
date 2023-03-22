@@ -48,7 +48,7 @@ public class SwordSpawner : MonoBehaviour
 
     private void RandomiseSpawn()
     {
-        spawnPosition.y = Random.Range(-3.5f, 3.5f);
+        spawnPosition.y = Random.Range(-4.8f, 4.8f);
     }
 
     private void UpdateDifficulty()

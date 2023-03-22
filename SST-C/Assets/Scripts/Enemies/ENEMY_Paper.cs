@@ -53,7 +53,7 @@ public class ENEMY_Paper : MonoBehaviour
         position = transform.position;
 
         //Check if enemy is at the boundary
-        if (position.y >= 4 || position.y <= -4)
+        if (position.y >= 5.2 || position.y <= -5.2)
         {
             moveSpeed = -moveSpeed;
         }

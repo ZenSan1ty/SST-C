@@ -41,7 +41,7 @@ public class PaperBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        curHealth = 30;
+        curHealth = maxHealth;
     }
 
     // Update is called once per frame
