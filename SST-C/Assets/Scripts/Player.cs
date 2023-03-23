@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float fireTime = 0f;
     [SerializeField] private bool canFire = true;
     [SerializeField] private HealthBar healthBar;
+    public Animator animator;
 
     //Health info
     public int maxHealth = 20;
@@ -103,14 +104,18 @@ public class Player : MonoBehaviour
     private void ATK_Sword()
     {
         Instantiate(Sword, attackSpawnPos.transform.position, transform.rotation);
+        animator.SetTrigger("Attack Forward T");
+
 
         canFire = false;
         fireTime = Time.time + fireRate;
+
     }
 
     private void ATK_Paper()
     {
         Instantiate(Paper, attackSpawnPos.transform.position, transform.rotation);
+        animator.SetTrigger("Attack Up T");
 
         canFire = false;
         fireTime = Time.time + fireRate;
@@ -119,6 +124,7 @@ public class Player : MonoBehaviour
     private void ATK_Rock()
     {
         Instantiate(Rock, attackSpawnPos.transform.position, transform.rotation);
+        animator.SetTrigger("Attack Forward T");
 
         canFire = false;
         fireTime = Time.time + fireRate;
