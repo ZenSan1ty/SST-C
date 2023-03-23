@@ -178,8 +178,10 @@ public class SwordBoss : MonoBehaviour
             currentAttack = null;
             GameManager.instance.sBossDefeated = true;
             GameManager.instance.sBossAlive = false;
+            GameManager.instance.swordsKilled += 10;
             GameManager.instance.ActivateSpawners();
             player.GetComponent<Player>().currentHealth = maxHealth;
+            player.GetComponent<Player>().TakeDamage(0);
         }
     }
 

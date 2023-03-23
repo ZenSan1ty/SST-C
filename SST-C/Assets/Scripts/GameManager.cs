@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerDead == false)
         {
-            //CalculateScore();
+            CalculateScore();
 
         }
 
@@ -98,15 +98,12 @@ public class GameManager : MonoBehaviour
     {
         timeSinceStart += Time.deltaTime;
         Score = (int)(((rocksKilled + papersKilled + swordsKilled) * 50) + (Mathf.Round(timeSinceStart) * 10));
-        if (playerDead)
-        {
             if (rBossDefeated)
                 Score += 500;
             if (sBossDefeated)
                 Score += 500;
             if (pBossDefeated)
                 Score += 500;
-        }
         UpdateScore();
     }
     
@@ -143,6 +140,9 @@ public class GameManager : MonoBehaviour
         rockSpawner.gameObject.SetActive(false);
         paperSpawner.gameObject.SetActive(false);
         swordSpawner.gameObject.SetActive(false);
+        rocksAlive = 0;
+        papersAlive = 0;
+        swordsAlive = 0;
         DestroyEnemies();
         
     }

@@ -203,8 +203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291ae236bfddccc40be231ab25158aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isStage1: 0
-  isStage2: 1
+  isStage1: 1
+  isStage2: 0
   isStage3: 0
   maxHealth: 60
   curHealth: 0

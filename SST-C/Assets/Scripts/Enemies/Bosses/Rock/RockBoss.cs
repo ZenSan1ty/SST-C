@@ -170,8 +170,10 @@ public class RockBoss : MonoBehaviour
             currentAttack = null;
             GameManager.instance.rBossDefeated = true;
             GameManager.instance.rBossAlive = false;
+            GameManager.instance.rocksKilled += 10;
             GameManager.instance.ActivateSpawners();
             player.GetComponent<Player>().currentHealth = maxHealth;
+            player.GetComponent<Player>().TakeDamage(0);
         }
     }
 

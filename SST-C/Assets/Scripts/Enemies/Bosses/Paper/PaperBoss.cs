@@ -161,8 +161,10 @@ public class PaperBoss : MonoBehaviour
             currentAttack = null;
             GameManager.instance.pBossDefeated = true;
             GameManager.instance.pBossAlive = false;
+            GameManager.instance.papersKilled += 10;
             GameManager.instance.ActivateSpawners();
             player.GetComponent<Player>().currentHealth = maxHealth;
+            player.GetComponent<Player>().TakeDamage(0);
         }
     }
 
