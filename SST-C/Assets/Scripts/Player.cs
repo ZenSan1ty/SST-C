@@ -17,6 +17,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float fireTime = 0f;
     [SerializeField] private bool canFire = true;
     [SerializeField] private HealthBar healthBar;
+    public AudioSource musicSource;
+    public AudioSource hitSource;
+    public AudioClip songStart;
+    public AudioClip songLoop;
+    public AudioClip damage;
     public Animator animator;
 
     //Health info
@@ -28,6 +33,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        StartCoroutine(PlayMusic());
     }
 
     // Update is called once per frame
@@ -133,6 +139,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        hitSource.Play();
         healthBar.UpdateHealthBar();
 
         if (currentHealth <= 0)
@@ -140,5 +147,15 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
             GameManager.instance.PlayerDied();
         }
+    }
+
+    IEnumerator PlayMusic()
+    {
+        musicSource.clip = songStart;
+        musicSource.Play();
+        yield return new WaitForSeconds(songStart.length);
+        musicSource.clip = songLoop;
+        musicSource.Play();
+        musicSource.loop = true;
     }
 }
